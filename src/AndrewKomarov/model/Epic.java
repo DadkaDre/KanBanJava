@@ -1,15 +1,17 @@
 package AndrewKomarov.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
-    private final ArrayList<SubTask> epicSubtasks = new ArrayList<>();
+    private final List<SubTask> epicSubtasks = new ArrayList<>();
 
-    public  ArrayList<SubTask> getEpicSubtasks() {
-        return epicSubtasks;
-    }
     public Epic (String name, String description) {
         super(name, description);
+    }
+
+    public  List<SubTask> getEpicSubtasks() {
+        return epicSubtasks;
     }
 
     @Override

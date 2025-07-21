@@ -1,4 +1,4 @@
-package AndrewKomarov.model;
+package andrewKomarow.model;
 
 public class SubTask extends Task {
     private Epic epic;

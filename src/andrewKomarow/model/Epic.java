@@ -1,4 +1,4 @@
-package AndrewKomarov.model;
+package andrewKomarow.model;
 
 import java.util.ArrayList;
 import java.util.List;

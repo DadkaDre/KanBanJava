@@ -1,8 +1,8 @@
-package AndrewKomarov.service;
+package andrewKomarow.service;
 
-import AndrewKomarov.model.Epic;
-import AndrewKomarov.model.SubTask;
-import AndrewKomarov.model.Task;
+import andrewKomarow.model.Epic;
+import andrewKomarow.model.SubTask;
+import andrewKomarow.model.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ class InMemoryHistoryManagerTest {
     @DisplayName("Тестируем метод добавления")
     void shouldAdd2Tasks() {
 
-        assertEquals(historyManager.getHistory(), List.of(task, task2, task3, epic, subTask), "Кол-во не совпадает");
+        assertEquals(historyManager.getHistory(), List.of(task, task2, task3, epic, epic2, epic3, subTask, subTask2, subtask3), "Кол-во не совпадает");
     }
 
     @Test

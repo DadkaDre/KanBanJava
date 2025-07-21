@@ -1,4 +1,4 @@
-package AndrewKomarov.model;
+package andrewKomarow.model;
 
 public class Task {
     private int id;

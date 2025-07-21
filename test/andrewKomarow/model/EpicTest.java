@@ -1,9 +1,9 @@
-package AndrewKomarov.model;
+package andrewKomarow.model;
 
-import AndrewKomarov.service.HistoryManager;
-import AndrewKomarov.service.InMemoryHistoryManager;
-import AndrewKomarov.service.InMemoryTaskManager;
-import AndrewKomarov.service.TaskManager;
+import andrewKomarow.service.HistoryManager;
+import andrewKomarow.service.InMemoryHistoryManager;
+import andrewKomarow.service.InMemoryTaskManager;
+import andrewKomarow.service.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

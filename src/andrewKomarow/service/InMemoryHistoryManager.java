@@ -1,7 +1,7 @@
-package AndrewKomarov.service;
+package andrewKomarow.service;
 
-import AndrewKomarov.model.Node;
-import AndrewKomarov.model.Task;
+import andrewKomarow.model.Node;
+import andrewKomarow.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

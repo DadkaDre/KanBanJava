@@ -1,6 +1,6 @@
-package AndrewKomarov.service;
+package andrewkomarow.service;
 
-import AndrewKomarov.model.Task;
+import andrewkomarow.model.Task;
 
 import java.util.List;
 

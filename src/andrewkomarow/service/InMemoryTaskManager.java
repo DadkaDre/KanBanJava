@@ -1,9 +1,9 @@
-package AndrewKomarov.service;
+package andrewkomarow.service;
 
-import AndrewKomarov.model.Epic;
-import AndrewKomarov.model.Status;
-import AndrewKomarov.model.SubTask;
-import AndrewKomarov.model.Task;
+import andrewkomarow.model.Epic;
+import andrewkomarow.model.Status;
+import andrewkomarow.model.SubTask;
+import andrewkomarow.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

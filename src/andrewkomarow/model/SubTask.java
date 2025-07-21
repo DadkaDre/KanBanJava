@@ -1,4 +1,4 @@
-package AndrewKomarov.model;
+package andrewkomarow.model;
 
 public class SubTask extends Task {
     private Epic epic;
@@ -6,9 +6,11 @@ public class SubTask extends Task {
     public void setEpic(Epic epic) {
         this.epic = epic;
     }
+
     public Epic getEpic() {
         return epic;
     }
+
     public SubTask(String name, String description) {
         super(name, description);
     }
@@ -16,10 +18,10 @@ public class SubTask extends Task {
     @Override
     public String toString() {
         return "SubTask{" +
-                "id= "+ super.getId() +
-                ", name= "+ super.getName() +
-                ", description= "+super.getDescription()+
-                ", status= "+super.getStatus()+
+                "id= " + super.getId() +
+                ", name= " + super.getName() +
+                ", description= " + super.getDescription() +
+                ", status= " + super.getStatus() +
                 "}";
     }
 }

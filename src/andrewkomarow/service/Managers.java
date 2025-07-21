@@ -1,4 +1,4 @@
-package AndrewKomarov.service;
+package andrewkomarow.service;
 
 public class Managers {
     public static TaskManager getDefaults() {

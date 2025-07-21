@@ -1,15 +1,10 @@
-package AndrewKomarov;
+package andrewkomarow;
 
-import AndrewKomarov.model.Epic;
-import AndrewKomarov.model.Status;
-import AndrewKomarov.model.SubTask;
-import AndrewKomarov.model.Task;
-import AndrewKomarov.service.HistoryManager;
-import AndrewKomarov.service.InMemoryTaskManager;
-import AndrewKomarov.service.Managers;
-import AndrewKomarov.service.TaskManager;
-
-import java.util.List;
+import andrewkomarow.model.Epic;
+import andrewkomarow.model.SubTask;
+import andrewkomarow.model.Task;
+import andrewkomarow.service.Managers;
+import andrewkomarow.service.TaskManager;
 
 public class Main {
     public static void main(String[] args) {

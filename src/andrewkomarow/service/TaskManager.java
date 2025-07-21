@@ -1,10 +1,9 @@
-package AndrewKomarov.service;
+package andrewkomarow.service;
 
-import AndrewKomarov.model.Epic;
-import AndrewKomarov.model.SubTask;
-import AndrewKomarov.model.Task;
+import andrewkomarow.model.Epic;
+import andrewkomarow.model.SubTask;
+import andrewkomarow.model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
@@ -34,6 +33,7 @@ public interface TaskManager {
     void removeSubtasks();
 
     void removeTaskId(int id);
+
     void removeEpicId(int id);
 
     void removeSubTaskId(int id);

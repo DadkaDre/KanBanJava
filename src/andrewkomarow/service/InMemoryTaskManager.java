@@ -1,9 +1,9 @@
-package AndrewKomarov.service;
+package andrewkomarow.service;
 
-import AndrewKomarov.model.Epic;
-import AndrewKomarov.model.Status;
-import AndrewKomarov.model.SubTask;
-import AndrewKomarov.model.Task;
+import andrewkomarow.model.Epic;
+import andrewkomarow.model.Status;
+import andrewkomarow.model.SubTask;
+import andrewkomarow.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,39 +106,56 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeTasks() {
+        for (Integer id : tasks.keySet()) {
+            manager.remove(id);
+        }
         tasks.clear();
     }
 
     @Override
     public void removeEpics() {
+        removeSubtasks();
+        for (Integer id : epics.keySet()) {
+            manager.remove(id);
+        }
         epics.clear();
+
     }
 
     @Override
     public void removeSubtasks() {
-        for (Epic epic : epics.values()) {
-            epic.getEpicSubtasks().clear();
+        for (Integer id : subtasks.keySet()) {
+            manager.remove(id);
         }
-        epics.clear();
+        for (Integer id : epics.keySet()) {
+            manager.remove(id);
+
+        }
         subtasks.clear();
+        epics.clear();
     }
+
     @Override
     public void removeTaskId(int id) {
 
         if (id <= 0 || tasks.get(id) == null) {
             System.out.println("Неверный параметр");
         }
+        manager.remove(id);
         tasks.remove(id);
 
     }
+
     @Override
     public void removeEpicId(int id) {
-        if (id<=0||epics.get(id) == null) {
+        if (id <= 0 || epics.get(id) == null) {
             System.out.println("Неверное значение id");
         }
+        manager.remove(id);
         epics.remove(id);
 
     }
+
     @Override
     public void removeSubTaskId(int id) {
         SubTask subTask = subtasks.get(id);
@@ -148,6 +165,7 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             Epic epic = subTask.getEpic();
             epic.getEpicSubtasks().remove(subTask);
+            manager.remove(id);
             updateEpicStatus(epic);
             subtasks.remove(id);
         }
@@ -177,10 +195,11 @@ public class InMemoryTaskManager implements TaskManager {
         oldEpic.setDescription(epic.getDescription());
         return oldEpic;
     }
+
     @Override
     public SubTask updateSubTask(int id, SubTask subTask) {
         SubTask oldSubtask = subtasks.get(id);
-        if (!check(id, subTask)|| oldSubtask == null) {
+        if (!check(id, subTask) || oldSubtask == null) {
             System.out.println("Неверные параметры");
             return null;
         }
@@ -188,14 +207,14 @@ public class InMemoryTaskManager implements TaskManager {
         subTask.setStatus(oldSubtask.getStatus());
         subTask.setEpic(oldSubtask.getEpic());
         Epic oldEpic = epics.get(oldSubtask.getEpic().getId());
-        for (SubTask subTask1: oldEpic.getEpicSubtasks()) {
+        for (SubTask subTask1 : oldEpic.getEpicSubtasks()) {
             if (subTask1.equals(subTask)) {
                 subTask1.setName(subTask.getName());
                 subTask1.setDescription(subTask.getDescription());
             }
         }
         updateEpicStatus(oldEpic);
-        subtasks.put(id,subTask);
+        subtasks.put(id, subTask);
         return subTask;
     }
 
@@ -230,5 +249,4 @@ public class InMemoryTaskManager implements TaskManager {
     private boolean check(int id, Object obj) {
         return id > 0 && obj != null;
     }
-
 }

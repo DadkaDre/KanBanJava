@@ -14,8 +14,9 @@ import java.util.Map;
 
 
 public class FileBackedTaskManager extends InMemoryTaskManager implements TaskManager {
-    private final  Map<Integer, Integer> map = new HashMap<>();
+    private final Map<Integer, Integer> map = new HashMap<>();
     private final Path path;
+
     public FileBackedTaskManager(HistoryManager manager, Path path) {
         super(manager);
         this.path = path;
@@ -29,7 +30,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
     private Task fromString(String value) {
 
-        String[]array = value.split(",");
+        String[] array = value.split(",");
         int id = Integer.parseInt(array[0]);
         Type type = Type.valueOf(array[1].trim());
         String name = array[2];
@@ -40,25 +41,25 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             map.put(id, Integer.parseInt(array[5].trim()));
         }
         return switch (type) {
-            case TASK -> new Task(id,type,name,status,description);
-            case EPIC -> new Epic(id,type,name,status,description);
-            case SUB_TASK -> new SubTask(id,type,name,status,description);
+            case TASK -> new Task(id, type, name, status, description);
+            case EPIC -> new Epic(id, type, name, status, description);
+            case SUB_TASK -> new SubTask(id, type, name, status, description);
         };
     }
 
     private void save() {
-        try(BufferedWriter bw = Files.newBufferedWriter(path)) {
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
             bw.write("id,type,name,status,description.epic");
             bw.newLine();
-            for (Map.Entry<Integer, Task> entry: tasks.entrySet()) {
+            for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
                 bw.write(TaskConverter.toString(entry.getValue()));
                 bw.newLine();
             }
-            for (Map.Entry<Integer, Epic> entry: epics.entrySet()) {
+            for (Map.Entry<Integer, Epic> entry : epics.entrySet()) {
                 bw.write(TaskConverter.toString(entry.getValue()));
                 bw.newLine();
             }
-            for (Map.Entry<Integer, SubTask> entry: subtasks.entrySet()) {
+            for (Map.Entry<Integer, SubTask> entry : subtasks.entrySet()) {
                 bw.write(TaskConverter.toString(entry.getValue()));
                 bw.newLine();
             }
@@ -68,24 +69,24 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         }
     }
 
-    private  void load() {
+    private void load() {
         int maxId = 0;
 
-        try(BufferedReader br = Files.newBufferedReader(path)) {
+        try (BufferedReader br = Files.newBufferedReader(path)) {
             br.readLine();
-            while(br.ready()) {
+            while (br.ready()) {
                 String line = br.readLine();
                 Task task = fromString(line);
                 int id = task.getId();
                 switch (task.getType()) {
                     case TASK -> tasks.put(id, task);
-                    case EPIC -> epics.put(id,(Epic) task);
+                    case EPIC -> epics.put(id, (Epic) task);
                     case SUB_TASK -> subtasks.put(id, (SubTask) task);
                 }
                 maxId = Math.max(id, maxId);
             }
             counter = maxId;
-            for(SubTask subTask: subtasks.values()) {
+            for (SubTask subTask : subtasks.values()) {
                 subTask.setEpic(epics.get(map.get(subTask.getId())));
             }
         } catch (IOException e) {
@@ -95,23 +96,23 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
     @Override
     public Task createTask(Task task) {
-         Task createdTask = super.createTask(task);
-         save();
-         return createdTask;
+        Task createdTask = super.createTask(task);
+        save();
+        return createdTask;
     }
 
     @Override
     public Epic createEpic(Epic epic) {
-        Epic createdEpic =  super.createEpic(epic);
+        Epic createdEpic = super.createEpic(epic);
         save();
         return createdEpic;
     }
 
     @Override
     public SubTask createSubtask(Epic epic, SubTask subTask) {
-         SubTask createdSubTask = super.createSubtask(epic, subTask);
-         save();
-         return createdSubTask;
+        SubTask createdSubTask = super.createSubtask(epic, subTask);
+        save();
+        return createdSubTask;
     }
 
     @Override

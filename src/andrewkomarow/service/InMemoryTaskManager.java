@@ -86,7 +86,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Epic getEpicId(int id) {
         Epic epic = epics.get(id);
         if (epic == null) {
-          throw new NotFoundException("Нет такого эпика по id: " + id);
+            throw new NotFoundException("Нет такого эпика по id: " + id);
         }
         manager.add(epic);
         updateEpicStatus(epic);
@@ -97,7 +97,7 @@ public class InMemoryTaskManager implements TaskManager {
     public SubTask getSubTaskId(int id) {
         SubTask subTask = subtasks.get(id);
         if (subTask == null) {
-           throw new NotFoundException("YНет такой подзадачи по id: "+ id);
+            throw new NotFoundException("Нет такой подзадачи по id: " + id);
         }
         manager.add(subTask);
         return subTask;
@@ -138,8 +138,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void removeTaskId(int id) {
 
-        if (id <= 0)  {
-           throw new IllegalArgumentException("id должен быть больше нуля. Ваше значение: "+ id);
+        if (id <= 0) {
+            throw new IllegalArgumentException("id должен быть больше нуля. Ваше значение: " + id);
         }
         if (tasks.get(id) == null) {
             throw new NotFoundException("Нет такой задачи по id: " + id);
@@ -151,8 +151,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeEpicId(int id) {
-        if (id <= 0 ) {
-            throw new IllegalArgumentException("id должен быть больше нуля. Ваше значение: "+ id);
+        if (id <= 0) {
+            throw new IllegalArgumentException("id должен быть больше нуля. Ваше значение: " + id);
         }
         if (epics.get(id) == null) {
             throw new NotFoundException("Нет такого эпика по id: " + id);
@@ -168,25 +168,25 @@ public class InMemoryTaskManager implements TaskManager {
         if (subTask == null) {
             throw new NotFoundException("Нет такой подзадачи по айди");
         }
-        if (id <= 0 ) {
+        if (id <= 0) {
             throw new IllegalArgumentException("Неверный параметр");
 
         }
-            Epic epic = subTask.getEpic();
-            epic.getEpicSubtasks().remove(subTask);
-            manager.remove(id);
-            updateEpicStatus(epic);
-            subtasks.remove(id);
+        Epic epic = subTask.getEpic();
+        epic.getEpicSubtasks().remove(subTask);
+        manager.remove(id);
+        updateEpicStatus(epic);
+        subtasks.remove(id);
     }
 
     @Override
     public Task updateTask(int id, Task task) {
         Task oldTask = tasks.get(id);
-        if (!check(id, task) ) {
-            throw new IllegalArgumentException(String.format("Неверные параметры id: %d, object: %b", id,task));
+        if (!check(id, task)) {
+            throw new IllegalArgumentException(String.format("Неверные параметры id: %d, object: %b", id, task));
         }
-        if(oldTask == null) {
-            throw new NotFoundException("Нет такой задачи по id: "+ id);
+        if (oldTask == null) {
+            throw new NotFoundException("Нет такой задачи по id: " + id);
         }
         task.setId(id);
         task.setStatus(oldTask.getStatus());
@@ -197,12 +197,12 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Epic updateEpic(int id, Epic epic) {
         Epic oldEpic = epics.get(id);
-        if (!check(id, epic) ) {
+        if (!check(id, epic)) {
             throw new IllegalArgumentException(String.format("Неверные параметры id: %d, Object: %b", id, epic));
 
         }
         if (oldEpic == null) {
-            throw new NotFoundException("Нет такого эпика по id: "+ id);
+            throw new NotFoundException("Нет такого эпика по id: " + id);
         }
         oldEpic.setName(epic.getName());
         oldEpic.setDescription(epic.getDescription());
@@ -212,8 +212,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public SubTask updateSubTask(int id, SubTask subTask) {
         SubTask oldSubtask = subtasks.get(id);
-        if (!check(id, subTask) ) {
-            throw new IllegalArgumentException(String.format("Неверные параметры id: %d, object: %b", id,subTask));
+        if (!check(id, subTask)) {
+            throw new IllegalArgumentException(String.format("Неверные параметры id: %d, object: %b", id, subTask));
         }
         if (oldSubtask == null) {
             throw new NotFoundException("Нет такой подзадачи по id: " + id);
@@ -260,7 +260,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    private boolean check(int id,Task obj) {
+    private boolean check(int id, Task obj) {
         return id > 0 && obj != null;
     }
 }

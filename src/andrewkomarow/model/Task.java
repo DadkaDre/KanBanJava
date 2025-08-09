@@ -1,7 +1,5 @@
 package andrewkomarow.model;
 
-import javax.crypto.spec.DESedeKeySpec;
-
 public class Task {
     private int id;
     private String name;
@@ -15,12 +13,13 @@ public class Task {
         this.name = name;
         this.description = description;
     }
+
     public Task(Integer id, Type type, String name, Status status, String description) {
-         this.id = id;
-         this.type = type;
-         this.name = name;
-         this.status = status;
-         this.description = description;
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.status = status;
+        this.description = description;
     }
 
     public void setId(int id) {
@@ -54,7 +53,11 @@ public class Task {
     public Status getStatus() {
         return status;
     }
-    public Type getType() {return Type.TASK;}
+
+    public Type getType() {
+        return Type.TASK;
+    }
+
     public Epic getEpic() {
         return null;
     }

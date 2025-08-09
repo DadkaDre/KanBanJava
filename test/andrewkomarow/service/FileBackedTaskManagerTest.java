@@ -18,26 +18,28 @@ class FileBackedTaskManagerTest {
     Task task;
     Epic epic;
     SubTask subTask;
+
     @BeforeEach
     public void init() {
         manager = new FileBackedTaskManager(new InMemoryHistoryManager(), Paths.get("resources/test.CSV"));
 
-        task = manager.createTask(new Task("task1","description1"));
-        epic = manager.createEpic(new Epic("epic","descriptionEpic"));
-        subTask = manager.createSubtask(epic,new SubTask("subTask","descriptionSub"));
+        task = manager.createTask(new Task("task1", "description1"));
+        epic = manager.createEpic(new Epic("epic", "descriptionEpic"));
+        subTask = manager.createSubtask(epic, new SubTask("subTask", "descriptionSub"));
     }
 
     @Test
     void shouldSaveTasks() {
 
         TaskManager manager2 = FileBackedTaskManager.loadFromFile(Paths.get("resources/test.CSV"));
-        manager2.createTask(new Task("task2","description"));
-        assertEquals(4, manager2.getTaskId(4).getId(),"id должен быть равен 4");
+        manager2.createTask(new Task("task2", "description"));
+        assertEquals(4, manager2.getTaskId(4).getId(), "id должен быть равен 4");
 
     }
+
     @Test
     void shouldLoadManager() {
         TaskManager manager2 = FileBackedTaskManager.loadFromFile(Paths.get("resources/test.CSV"));
-        assertEquals(manager.getTasks(), manager2.getTasks(),"Задачи должны быть одинаковые");
+        assertEquals(manager.getTasks(), manager2.getTasks(), "Задачи должны быть одинаковые");
     }
 }

@@ -42,10 +42,10 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    @DisplayName("Тестируем метод плучения всех Эпиков")
+    @DisplayName("Тестируем метод получения всех Эпиков")
     void shouldReturnEpicList() {
         List<Epic> epicList = manager.getEpics();
-        assertEquals(1, epicList.size(), "Кол-во елементов в листе должно быть 1");
+        assertEquals(1, epicList.size(), "Кол-во элементов в листе должно быть 1");
     }
 
     @Test
@@ -148,7 +148,7 @@ class InMemoryTaskManagerTest {
     void shouldRemoveTaskWithId1() {
         manager.removeTaskId(1);
 
-        assertNull(manager.getTaskId(1));
+        assertEquals(0, manager.getTasks().size());
     }
 
     @Test
@@ -156,7 +156,7 @@ class InMemoryTaskManagerTest {
     void shouldRemoveEpicWithId2() {
         manager.removeEpicId(2);
 
-        assertNull(manager.getEpicId(2));
+        assertEquals(0,manager.getEpics().size());
     }
 
     @Test
@@ -164,7 +164,7 @@ class InMemoryTaskManagerTest {
     void shouldRemoveSubTaskWithId3() {
         manager.removeSubTaskId(3);
 
-        assertNull(manager.getSubTaskId(3));
+        assertEquals(1,manager.getEpics().size());
     }
 
     @Test

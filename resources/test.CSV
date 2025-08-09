@@ -1,0 +1,4 @@
+id,type,name,status,description.epic
+1, TASK, task1, NEW, description1, null
+2, EPIC, epic, NEW, descriptionEpic, null
+3, SUB_TASK, subTask, NEW, descriptionSub, 2

@@ -1,5 +1,6 @@
 package andrewkomarow.service;
 
+import andrewkomarow.exception.NotFoundException;
 import andrewkomarow.model.Node;
 import andrewkomarow.model.Task;
 
@@ -39,7 +40,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         Node node = historyMap.get(id);
         if (node == null) {
-            System.out.println("Задачи нет в списке");
+            throw new NotFoundException("Нет такой задачи в списке  по id: " + id);
         } else {
             removeNode(node);
         }

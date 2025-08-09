@@ -1,48 +1,39 @@
 package andrewkomarow;
 
-import andrewkomarow.model.Epic;
-import andrewkomarow.model.SubTask;
-import andrewkomarow.model.Task;
-import andrewkomarow.service.Managers;
+import andrewkomarow.service.FileBackedTaskManager;
 import andrewkomarow.service.TaskManager;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-
-        TaskManager manager = Managers.getDefaults();
-        Task task = manager.createTask(new Task("Task", "description"));
-        Task task2 = manager.createTask(new Task("Task", "description"));
-        Task task3 = manager.createTask(new Task("Task", "description"));
-        Task task4 = manager.createTask(new Task("Task", "description"));
-        Task task5 = manager.createTask(new Task("Task", "description"));
-        Task task6 = manager.createTask(new Task("Task", "description"));
-        Task task7 = manager.createTask(new Task("Task", "description"));
-        Task task8 = manager.createTask(new Task("Task", "description"));
-        manager.removeTaskId(1);
-
-        System.out.println(manager.getTaskId(1));
-
-
-
-
-
-
-
-        Epic epic = manager.createEpic(new Epic("Epic", "description"));
-        SubTask subTask = manager.createSubtask(epic, new SubTask("Subtask","description"));
-        SubTask subTask1 = manager.createSubtask(epic, new SubTask("subTask1","Description1"));
-        SubTask newSubTask = new SubTask("NewSubTask", "NewDescription");
-
-
-
-       /* System.out.println(manager.getEpicId(epic.getId()).getEpicSubtasks().toString());
-        manager.updateSubTask(subTask.getId(), newSubTask);
-
-        System.out.println(manager.getEpicId(epic.getId()).getEpicSubtasks().toString());
-
-        subTask1.setStatus(Status.DONE);
-
-        System.out.println(manager.getEpicId(epic.getId()));*/
-
+        /*String str = "file.CSV";
+        readFile(str);*/
+        Path path = Paths.get("resources/test.CSV");
+        System.out.println("Ищем файл по пути: " + path.toAbsolutePath());
+        TaskManager manager = FileBackedTaskManager.loadFromFile(path);
+        System.out.println(manager.getSubtasks());
     }
+
+  /*  public static void readFile(String str) {
+        ClassLoader cl = Main.class.getClassLoader();
+        InputStream is = cl.getResourceAsStream("file.CSV");
+        if (is == null) {
+            throw new IllegalArgumentException("Файл не найден");
+        }
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(is,StandardCharsets.UTF_8))) {
+            String line;
+            while(br.ready()) {
+                line = br.readLine();
+                System.out.println(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

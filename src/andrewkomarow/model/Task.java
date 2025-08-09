@@ -6,8 +6,19 @@ public class Task {
     private String description;
     private Status status;
 
+    private Type type;
+    private Epic epic;
+
     public Task(String name, String description) {
         this.name = name;
+        this.description = description;
+    }
+
+    public Task(Integer id, Type type, String name, Status status, String description) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.status = status;
         this.description = description;
     }
 
@@ -41,6 +52,14 @@ public class Task {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Type getType() {
+        return Type.TASK;
+    }
+
+    public Epic getEpic() {
+        return null;
     }
 
 

@@ -39,7 +39,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         Node node = historyMap.get(id);
         if (node == null) {
-            System.out.println("Задачи нет в списке");
+            System.out.println(("Нет такой задачи в истории  по id: " + id));
         } else {
             removeNode(node);
         }

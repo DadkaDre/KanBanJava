@@ -1,6 +1,5 @@
 package andrewkomarow.service;
 
-import andrewkomarow.exception.NotFoundException;
 import andrewkomarow.model.Node;
 import andrewkomarow.model.Task;
 
